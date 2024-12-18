@@ -1,3 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def notes_page(request):
+    return render(request, 'notes.html')
+
+
+def add_page(request):
+    return render(request, 'add.html')

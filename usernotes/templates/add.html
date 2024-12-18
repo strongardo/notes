@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add note</title>
+</head>
+<body>
+<h1>Добавление заметки</h1>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <label for="title">Название</label>
+    <input type="text" name="title" id="title">
+    <br>
+    <br>
+    <label for="pubdate">Дата и время</label>
+    <input type="datetime-local" name="pubdate" id="pubdate">
+    <br>
+    <br>
+    <label for="text">Текст</label>
+    <textarea name="text" id="text"></textarea>
+    <br>
+    <br>
+    <button type="reset">Сбросить</button>
+    <button type="submit">Отправить</button>
+</form>
+
+</body>
+</html>

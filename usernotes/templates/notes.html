@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes</title>
+</head>
+<body>
+
+{% if user.is_authenticated %}
+<ul>
+    <li><a href="{% url 'add' %}">Добавить заметку</a></li>
+    <li>
+        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">Выйти</button>
+        </form>
+    </li>
+</ul>
+{% else %}
+<ul>
+    <li><a href="{% url 'reg' %}">Регистрация</a></li>
+    <li><a href="{% url 'login' %}">Логин</a></li>
+</ul>
+{% endif %}
+
+
+<h1>Ваши заметки</h1>
+<ul>
+    {% for note in notes %}
+    <li>
+        <p>note.id</p>
+        <h3>note.title</h3>
+        <p>note.pub_date</p>
+        <p>note.text</p>
+    </li>
+    {% endfor %}
+</ul>
+</body>
+</html>
