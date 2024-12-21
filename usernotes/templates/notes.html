@@ -1,37 +1,45 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Notes</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
 
-{% if user.is_authenticated %}
-<ul>
-    <li><a href="{% url 'add' %}">Добавить заметку</a></li>
-    <li>
-        <form action="{% url 'logout' %}" method="post" style="display:inline;">
-            {% csrf_token %}
-            <button type="submit">Выйти</button>
-        </form>
-    </li>
-</ul>
-{% else %}
-<ul>
-    <li><a href="{% url 'reg' %}">Регистрация</a></li>
-    <li><a href="{% url 'login' %}">Логин</a></li>
-</ul>
-{% endif %}
+<nav>
+    {% if user.is_authenticated %}
+    <ul>
+        <li><a href="{% url 'add' %}">Добавить заметку</a></li>
+        <li>
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Выйти</button>
+            </form>
+        </li>
+    </ul>
+    {% else %}
+    <ul>
+        <li><a href="{% url 'reg' %}">Регистрация</a></li>
+        <li><a href="{% url 'login' %}">Логин</a></li>
+    </ul>
+    {% endif %}
+</nav>
 
 
 <h1>Ваши заметки</h1>
-<ul>
+<ul class="note-list">
     {% for note in notes %}
     <li>
-        <p>note.id</p>
-        <h3>note.title</h3>
-        <p>note.pub_date</p>
-        <p>note.text</p>
+        <h3>{{ note.title }}</h3>
+        <p>{{ note.pub_date }}</p>
+        <p>{{ note.text }}</p>
+        <form class="delete_form" action="{% url 'delete_note' note.id %}" method="post">
+            {% csrf_token %}
+            <button class="delete_btn" type="submit">Удалить</button>
+        </form>
     </li>
     {% endfor %}
 </ul>
